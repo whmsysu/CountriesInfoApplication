@@ -1,13 +1,12 @@
 package com.example.haominwu.countriesinfoapplication.contract
 
 import com.example.haominwu.countriesinfoapplication.model.Country
+import com.example.haominwu.countriesinfoapplication.view.BaseView
 
 interface CountriesDisplayContract {
 
-    interface View {
-        fun showLoading()
+    interface View: BaseView {
         fun showCountriesList(countriesList: ArrayList<Country>)
-        fun showError()
     }
 
     interface Presenter {
