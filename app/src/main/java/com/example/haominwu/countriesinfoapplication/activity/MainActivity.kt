@@ -14,10 +14,10 @@ class MainActivity : BaseActivity(), CountriesDisplayContract.View {
     private var countriesAdapter: CountriesAdapter = CountriesAdapter(this)
 
     override fun showCountriesList(countriesList: ArrayList<Country>) {
-        pb_loading.visibility = View.GONE
         countriesAdapter.countries.clear()
         countriesAdapter.countries.addAll(countriesList)
         countriesAdapter.notifyDataSetChanged()
+        pb_loading.visibility = View.GONE
         lv_countries.visibility = View.VISIBLE
     }
 
@@ -30,8 +30,8 @@ class MainActivity : BaseActivity(), CountriesDisplayContract.View {
 
     override fun initView() {
         super.initView()
-        lv_countries.adapter = this.countriesAdapter
         this.presenter.attachView(this)
+        lv_countries.adapter = this.countriesAdapter
         showLoading()
         this.presenter.fetchCountries()
     }
