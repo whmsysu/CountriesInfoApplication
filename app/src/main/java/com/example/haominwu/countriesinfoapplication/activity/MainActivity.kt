@@ -34,6 +34,7 @@ class MainActivity : BaseActivity(), CountriesDisplayContract.View {
         lv_countries.adapter = this.countriesAdapter
         showLoading()
         this.presenter.fetchCountries()
+        title = "All Countries"
     }
 
     override fun getLayoutID(): Int {

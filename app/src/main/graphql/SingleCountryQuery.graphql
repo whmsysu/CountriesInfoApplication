@@ -1,0 +1,10 @@
+query SingleCountryQuery ($code: String!){
+  country(code: $code) {
+      name
+      emoji
+      code
+      native
+      phone
+      currency
+  }
+}

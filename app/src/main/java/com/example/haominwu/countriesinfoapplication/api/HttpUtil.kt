@@ -37,7 +37,7 @@ class HttpUtil {
 
                     val resultList = ArrayList<Country>()
                     for (country: CountriesQuery.Country in data!!.countries()!!) {
-                        resultList.add(Country(country.name()))
+                        resultList.add(Country(country.name(), country.emoji(), country.code()))
                     }
                     it.onNext(resultList)
                     it.onComplete()
@@ -49,6 +49,39 @@ class HttpUtil {
                 }
             })
         }
+    }
+
+    fun fetchSingleCountryApiCall(code: String): Observable<Country>? {
+
+        return Observable.create {
+            var singleCountryQuery = SingleCountryQuery.builder().code(code).build()
+            val singleCountryCall = apolloClient!!
+                .query(singleCountryQuery)
+
+            singleCountryCall.enqueue(object : ApolloCall.Callback<SingleCountryQuery.Data>() {
+                override fun onResponse(response: Response<SingleCountryQuery.Data>) {
+                    Logger.d("onResponse")
+                    val data = response.data()
+                    Logger.d(data)
+                    var country = Country(
+                        name = data!!.country()!!.name(),
+                        emoji = data!!.country()!!.emoji(),
+                        code = data!!.country()!!.code(),
+                        native = data!!.country()!!.native_(),
+                        phone = data!!.country()!!.phone(),
+                        currency = data!!.country()!!.currency()
+                    )
+                    it.onNext(country)
+                    it.onComplete()
+                }
+
+                override fun onFailure(e: ApolloException) {
+                    Logger.d("onFailure")
+                    it.onError(e)
+                }
+            })
+        }
+
     }
 
     companion object {
