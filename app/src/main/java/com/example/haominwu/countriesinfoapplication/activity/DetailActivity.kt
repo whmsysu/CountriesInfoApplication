@@ -15,7 +15,7 @@ class DetailActivity : BaseActivity(), SingleCountryDisplayContract.View {
     private var presenter = CountryDisplayPresenter()
 
     companion object {
-        fun newInstance(context: Context, name:String?, code:String?) {
+        fun newInstance(context: Context, name: String?, code: String?) {
             val intent = Intent()
             intent.setClass(context, DetailActivity::class.java)
             intent.putExtra("name", name)
