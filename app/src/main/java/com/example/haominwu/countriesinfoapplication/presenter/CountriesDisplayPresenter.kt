@@ -27,7 +27,7 @@ class CountriesDisplayPresenter : CountriesDisplayContract.Presenter {
             }
 
             override fun onError(e: Throwable) {
-
+                view?.showError()
             }
 
         })
