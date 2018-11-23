@@ -1,6 +1,7 @@
 package com.example.haominwu.countriesinfoapplication.activity
 
 import android.view.View
+import android.widget.Toast
 import com.example.haominwu.countriesinfoapplication.R
 import com.example.haominwu.countriesinfoapplication.adapter.CountriesAdapter
 import com.example.haominwu.countriesinfoapplication.contract.CountriesDisplayContract
@@ -10,6 +11,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity(), CountriesDisplayContract.View {
+
+    override fun showError() {
+        pb_loading.visibility = View.GONE
+        lv_countries.visibility = View.GONE
+        Toast.makeText(this, "Error loading api", Toast.LENGTH_LONG).show()
+    }
 
     private var countriesAdapter: CountriesAdapter = CountriesAdapter(this)
 

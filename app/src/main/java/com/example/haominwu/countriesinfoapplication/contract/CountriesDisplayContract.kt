@@ -7,6 +7,7 @@ interface CountriesDisplayContract {
     interface View {
         fun showLoading()
         fun showCountriesList(countriesList: ArrayList<Country>)
+        fun showError()
     }
 
     interface Presenter {

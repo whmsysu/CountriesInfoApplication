@@ -3,6 +3,7 @@ package com.example.haominwu.countriesinfoapplication.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import com.example.haominwu.countriesinfoapplication.R
 import com.example.haominwu.countriesinfoapplication.contract.SingleCountryDisplayContract
 import com.example.haominwu.countriesinfoapplication.model.Country
@@ -15,12 +16,18 @@ class DetailActivity : BaseActivity(), SingleCountryDisplayContract.View {
 
     companion object {
         fun newInstance(context: Context, name:String?, code:String?) {
-            var intent = Intent()
+            val intent = Intent()
             intent.setClass(context, DetailActivity::class.java)
             intent.putExtra("name", name)
             intent.putExtra("code", code)
             context.startActivity(intent)
         }
+    }
+
+    override fun showError() {
+        pb_loading.visibility = View.GONE
+        ll_country.visibility = View.GONE
+        Toast.makeText(this, "Error loading api", Toast.LENGTH_LONG).show()
     }
 
     override fun showLoading() {
@@ -43,8 +50,8 @@ class DetailActivity : BaseActivity(), SingleCountryDisplayContract.View {
         super.initView()
         presenter.attachView(this)
         showLoading()
-        var name = intent.getStringExtra("name")
-        var code = intent.getStringExtra("code")
+        val name = intent.getStringExtra("name")
+        val code = intent.getStringExtra("code")
         presenter.fetchSingleCountryByCode(code)
         title = name
     }

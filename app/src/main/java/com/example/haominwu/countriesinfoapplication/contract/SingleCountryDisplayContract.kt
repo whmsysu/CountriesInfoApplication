@@ -7,6 +7,7 @@ interface SingleCountryDisplayContract {
     interface View {
         fun showLoading()
         fun showCountryInfo(country: Country)
+        fun showError()
     }
 
     interface Presenter {
