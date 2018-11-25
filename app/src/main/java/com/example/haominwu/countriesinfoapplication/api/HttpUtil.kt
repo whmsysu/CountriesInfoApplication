@@ -71,7 +71,7 @@ class HttpUtil {
                         code = data.country()!!.code(),
                         native = data.country()!!.native_(),
                         phone = data.country()!!.phone(),
-                        currency = data!!.country()!!.currency()
+                        currency = data.country()!!.currency()
                     )
                     it.onNext(country)
                     it.onComplete()
