@@ -16,6 +16,8 @@ class HttpUtil {
     private var apolloClient: ApolloClient? = null
     private var countriesQuery = CountriesQuery.builder().build()
 
+    private constructor()
+
     init {
         val okHttpClient = OkHttpClient.Builder().build()
         apolloClient = ApolloClient.builder()
@@ -65,10 +67,10 @@ class HttpUtil {
                     Logger.d(data)
                     var country = Country(
                         name = data!!.country()!!.name(),
-                        emoji = data!!.country()!!.emoji(),
-                        code = data!!.country()!!.code(),
-                        native = data!!.country()!!.native_(),
-                        phone = data!!.country()!!.phone(),
+                        emoji = data.country()!!.emoji(),
+                        code = data.country()!!.code(),
+                        native = data.country()!!.native_(),
+                        phone = data.country()!!.phone(),
                         currency = data!!.country()!!.currency()
                     )
                     it.onNext(country)
@@ -85,12 +87,7 @@ class HttpUtil {
     }
 
     companion object {
-
-        private var instance = HttpUtil()
         private const val BASE_URL = "https://countries.trevorblades.com/"
-
-        fun getInstance(): HttpUtil {
-            return instance
-        }
+        val instance: HttpUtil by lazy { HttpUtil() }
     }
 }

@@ -11,7 +11,7 @@ import io.reactivex.disposables.Disposable
 
 class CountriesDisplayPresenter : CountriesDisplayContract.Presenter {
     override fun fetchCountries() {
-        var observable: Observable<ArrayList<Country>>? = HttpUtil.getInstance().fetchCountriesApiCall()
+        var observable: Observable<ArrayList<Country>>? = HttpUtil.instance.fetchCountriesApiCall()
 
         observable!!.observeOn(AndroidSchedulers.mainThread()).subscribe(object : Observer<ArrayList<Country>> {
             override fun onComplete() {

@@ -18,7 +18,7 @@ class CountryDisplayPresenter : SingleCountryDisplayContract.Presenter {
     }
 
     override fun fetchSingleCountryByCode(code: String) {
-        var observable: Observable<Country>? = HttpUtil.getInstance().fetchSingleCountryApiCall(code)
+        var observable: Observable<Country>? = HttpUtil.instance.fetchSingleCountryApiCall(code)
         observable!!.observeOn(AndroidSchedulers.mainThread()).subscribe(object : Observer<Country> {
             override fun onComplete() {
 
